@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+}
+
+/* Header personalizado */
+header {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+}
+
+/* To-Do List styles */
+.list-group-item {
+  transition: background 0.2s ease;
+}
+.list-group-item:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+/* Footer */
+footer {
+  font-size: 0.9rem;
+}
