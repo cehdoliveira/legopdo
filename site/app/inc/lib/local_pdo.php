@@ -24,7 +24,7 @@ class local_pdo extends PDO
         return $this->my_query($sql);
     }
 
-    public function insert(string $fields, string $table, string $options = ''): PDOStatement|false
+    public function insert(string $fields, string $table, string $options = ""): PDOStatement|false
     {
         $sql = sprintf("INSERT INTO %s SET %s %s", $table, $fields, $options);
         try {

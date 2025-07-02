@@ -3,7 +3,7 @@ createApp({
   data() {
     return {
       form: {
-        nome: "",
+        name: "",
         email: "",
         telefone: "",
         cpf: "",
@@ -22,10 +22,16 @@ createApp({
           method: "POST",
           body: formData,
         });
-        if (response.ok) {
-          alert("Cadastro enviado com sucesso!");
+        const data = await response.json();
+        if (response.ok && data.success) {
+          alert(data.message);
+          // Limpar formulário após sucesso
+          this.form.name = "";
+          this.form.email = "";
+          this.form.telefone = "";
+          this.form.cpf = "";
         } else {
-          alert("Erro ao enviar cadastro.");
+          alert(data.message || "Erro ao enviar cadastro.");
         }
       } catch (error) {
         alert("Erro de conexão.");

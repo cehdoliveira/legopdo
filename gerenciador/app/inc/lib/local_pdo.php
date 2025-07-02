@@ -14,7 +14,7 @@ class local_pdo extends PDO
         try {
             parent::__construct($dsn, $user, $pass, $options);
         } catch (PDOException $e) {
-            die('Erro de conexÃ£o: ' . $e->getMessage());
+            die('Erro de conexão: ' . $e->getMessage());
         }
     }
 
@@ -24,7 +24,7 @@ class local_pdo extends PDO
         return $this->my_query($sql);
     }
 
-    public function insert(string $fields, string $table, string $options = ''): PDOStatement|false
+    public function insert($fields, $table, $options = ''): PDOStatement|false
     {
         $sql = sprintf("INSERT INTO %s SET %s %s", $table, $fields, $options);
         try {

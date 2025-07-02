@@ -34,10 +34,30 @@ class site_controller
 
 	public function save($info)
 	{
-		$postData = isset($info["post"]) ? $info["post"] : [];
-		header('Content-Type: text/plain');
-		echo "Recebi os dados:\n";
-		print_r($postData);
+
+		$user = new users_model();
+		$user->populate($info["post"]);
+		$result = $user->save();
+		$lastId = $user->lastId();
+
+		print_pre($lastId, true);
+
+		header('Content-Type: application/json');
+
+		if ($result instanceof PDOStatement) {
+			
+			echo json_encode([
+				"success" => true,
+				"message" => "Usuário cadastrado com sucesso!",
+				"id" => $lastId
+			]);
+		} else {
+			http_response_code(500);
+			echo json_encode([
+				"success" => false,
+				"message" => "Erro ao cadastrar usuário."
+			]);
+		}
 		exit;
 	}
 }
