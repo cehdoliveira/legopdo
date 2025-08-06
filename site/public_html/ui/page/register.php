@@ -4,8 +4,8 @@
             <h2 class="mb-4">Cadastro</h2>
             <form @submit.prevent="submitForm">
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" v-model="form.nome" required>
+                    <label for="name" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="name" v-model="form.name" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>

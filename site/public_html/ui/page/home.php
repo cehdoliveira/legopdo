@@ -25,4 +25,16 @@
             </li>
         </ul>
     </section>
+    <section>
+        <h2 class="h4 mb-3">Usuários Ativos</h2>
+        <ul class="list-group">
+            <li
+                v-for="user in users"
+                :key="user.idx"
+                class="list-group-item d-flex justify-content-between align-items-center">
+                {{ user.name }} ({{ user.email }})
+                <span class="badge bg-primary rounded-pill">{{ user.telefone }}</span>
+            </li>
+        </ul>
+    </section>
 </main>

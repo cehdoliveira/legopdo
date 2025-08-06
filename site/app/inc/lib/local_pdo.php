@@ -27,8 +27,8 @@ class local_pdo extends PDO
     public function insert(string $fields, string $table, string $options = ""): PDOStatement|false
     {
         $sql = sprintf("INSERT INTO %s SET %s %s", $table, $fields, $options);
+        $this->beginTransaction();
         try {
-            $this->beginTransaction();
             $result = $this->my_query($sql);
             $this->commit();
             return $result;
@@ -41,8 +41,8 @@ class local_pdo extends PDO
     public function replace(string $fields, string $table): PDOStatement|false
     {
         $sql = sprintf("REPLACE INTO %s SET %s", $table, $fields);
+        $this->beginTransaction();
         try {
-            $this->beginTransaction();
             $result = $this->my_query($sql);
             $this->commit();
             return $result;
@@ -55,8 +55,8 @@ class local_pdo extends PDO
     public function update(string $fields, string $table, string $options = ''): PDOStatement|false
     {
         $sql = sprintf("UPDATE %s SET %s %s", $table, $fields, $options);
+        $this->beginTransaction();
         try {
-            $this->beginTransaction();
             $result = $this->my_query($sql);
             $this->commit();
             return $result;
@@ -69,8 +69,8 @@ class local_pdo extends PDO
     public function delete(string $table, string $options = ''): PDOStatement|false
     {
         $sql = sprintf("DELETE FROM %s %s", $table, $options);
+        $this->beginTransaction();
         try {
-            $this->beginTransaction();
             $result = $this->my_query($sql);
             $this->commit();
             return $result;

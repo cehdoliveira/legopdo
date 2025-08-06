@@ -14,6 +14,12 @@ class site_controller
 
 	public function display($info)
 	{
+
+		$users = new users_model();
+		$users->set_filter(array("active = 'yes'"));
+		$users->load_data();
+		$data = $users->data;
+
 		$vueController = 'app';
 		include(constant("cRootServer") . "ui/common/head.php");
 		include(constant("cRootServer") . "ui/common/header.php");
@@ -37,19 +43,14 @@ class site_controller
 
 		$user = new users_model();
 		$user->populate($info["post"]);
-		$result = $user->save();
-		$lastId = $user->lastId();
-
-		print_pre($lastId, true);
+		$user->save();
 
 		header('Content-Type: application/json');
 
-		if ($result instanceof PDOStatement) {
-			
+		if ($user->save() instanceof PDOStatement) {
 			echo json_encode([
 				"success" => true,
-				"message" => "Usuário cadastrado com sucesso!",
-				"id" => $lastId
+				"message" => "Usuário cadastrado com sucesso!"
 			]);
 		} else {
 			http_response_code(500);
