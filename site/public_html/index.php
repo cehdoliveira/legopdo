@@ -23,6 +23,7 @@ $dispatcher->add_route("GET", "/(index(\.json|\.xml|\.html)).*?", "function:basi
 $dispatcher->add_route("GET", "/?", "site_controller:display", null, $params);
 $dispatcher->add_route("GET", "/register", "site_controller:register", null, $params);
 $dispatcher->add_route("POST", "/save", "site_controller:save", $btn_save, $params);
+$dispatcher->add_route("POST", "/list-users", "site_controller:list_users", null, $params);
 
 if (! $dispatcher->exec()) {
 	basic_redir($home_url);

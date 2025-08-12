@@ -24,14 +24,15 @@ class local_pdo extends PDO
         return $this->my_query($sql);
     }
 
-    public function insert(string $fields, string $table, string $options = ""): PDOStatement|false
+    public function insert(string $fields, string $table, string $options = ""): int|false
     {
         $sql = sprintf("INSERT INTO %s SET %s %s", $table, $fields, $options);
         $this->beginTransaction();
         try {
-            $result = $this->my_query($sql);
+            $this->my_query($sql);
+            $lastId = $this->lastInsertId();
             $this->commit();
-            return $result;
+            return (int) $lastId;
         } catch (PDOException $e) {
             $this->rollBack();
             die("SQL error: $sql \n " . $e->getMessage());

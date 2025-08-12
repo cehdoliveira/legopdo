@@ -14,12 +14,6 @@ class site_controller
 
 	public function display($info)
 	{
-
-		$users = new users_model();
-		$users->set_filter(array("active = 'yes'"));
-		$users->load_data();
-		$data = $users->data;
-
 		$vueController = 'app';
 		include(constant("cRootServer") . "ui/common/head.php");
 		include(constant("cRootServer") . "ui/common/header.php");
@@ -43,11 +37,13 @@ class site_controller
 
 		$user = new users_model();
 		$user->populate($info["post"]);
-		$user->save();
+		$return = $user->save();
+
+		print_pre("Idx: " . $return, true);
 
 		header('Content-Type: application/json');
 
-		if ($user->save() instanceof PDOStatement) {
+		if ($return instanceof PDOStatement) {
 			echo json_encode([
 				"success" => true,
 				"message" => "Usuário cadastrado com sucesso!"
@@ -59,6 +55,21 @@ class site_controller
 				"message" => "Erro ao cadastrar usuário."
 			]);
 		}
+		exit;
+	}
+
+	public function list_users($info)
+	{
+		$users = new users_model();
+		$users->set_filter(array("active = 'yes'"));
+		$users->load_data();
+		$data = $users->data;
+
+		header('Content-Type: application/json');
+		echo json_encode([
+			"data" => $data,
+			"message" => "Usuários listados com sucesso!"
+		]);
 		exit;
 	}
 }

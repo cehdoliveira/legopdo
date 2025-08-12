@@ -33,7 +33,7 @@
                 :key="user.idx"
                 class="list-group-item d-flex justify-content-between align-items-center">
                 {{ user.name }} ({{ user.email }})
-                <span class="badge bg-primary rounded-pill">{{ user.telefone }}</span>
+                <span class="badge bg-primary rounded-pill">{{ user.cpf }}</span>
             </li>
         </ul>
     </section>
