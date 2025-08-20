@@ -39,11 +39,9 @@ class site_controller
 		$user->populate($info["post"]);
 		$return = $user->save();
 
-		print_pre("Idx: " . $return, true);
-
 		header('Content-Type: application/json');
 
-		if ($return instanceof PDOStatement) {
+		if (isset($return)) {
 			echo json_encode([
 				"success" => true,
 				"message" => "Usuário cadastrado com sucesso!"
